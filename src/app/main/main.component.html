@@ -1,0 +1,21 @@
+<h1>Welcome to Our Application</h1>
+<p>Please select your role:</p>
+<div class="button-container">
+  <button class="custom-button" (click)="navigateToStudentPage()">Student</button>
+  <button class="custom-button" (click)="showAdminLoginForm = true">Admin</button>
+</div>
+<!-- Admin login form -->
+<div *ngIf="showAdminLoginForm" class="admin-form">
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="login()" [formGroup]="adminLoginForm">
+    <div class="form-group">
+      <label for="use">Username:</label>
+      <input type="text" id="use" formControlName="use" required>
+    </div>
+    <div class="form-group">
+      <label for="pass">Password:</label>
+      <input type="password" id="pass" formControlName="pass" required>
+    </div>
+    <button type="submit" class="custom-button">Login</button>
+  </form>
+</div>

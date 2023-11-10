@@ -1,0 +1,22 @@
+<h1>Past Survey Information</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Liked Most</th>
+        <th>Interest Source</th>
+        <th>Recommend Likelihood</th>
+        <th>Additional Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let survey of surveys">
+        <td>{{ survey.id }}</td>
+        <td>{{ survey.likedMost }}</td>
+        <td>{{ survey.interestSource }}</td>
+        <td>{{ survey.recommendLikelihood }}</td>
+        <td>{{ survey.additionalComments }}</td>
+      </tr>
+    </tbody>
+  </table>

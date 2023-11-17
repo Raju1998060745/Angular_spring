@@ -26,28 +26,37 @@ export class StudentComponent {
       zip: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      likedMost: ['', Validators.required],
+      likedMost: [[]],
       interestSource: ['', Validators.required],
       recommendLikelihood: ['', Validators.required],
       additionalComments: ['']
     });
+    this.surveyForm.patchValue({ likedMost: '' });
   }
 
   submitSurvey() {
     if (this.surveyForm.valid) {
-      const surveyData = this.surveyForm.value;
-      this.http.post('http://localhost:8080/api/surveys', surveyData).subscribe(
-          (response) => {
-            console.log('Survey Data Sent:', response);
-            alert('Thank you for submitting the survey!');
-            this.router.navigate(['/tk']);
-          },
-          (error) => {
-            console.error('Error sending the request:', error);
-          }
-        );
-  }
-  
-}
-}
+      // Ensure likedMost is not null or undefined before splitting
+      const likedMostValue = String(this.surveyForm.value.likedMost) || '';
+      
+      // Transform likedMost to match the expected structure
+      const likedMostArray = likedMostValue.split(',');
 
+      console.log('Liked Most Values:', likedMostArray);
+
+      // Update the survey data
+      const surveyData = { ...this.surveyForm.value, likedMost: likedMostArray };
+      
+      this.http.post('http://localhost:8080/api/surveys', surveyData).subscribe(
+        (response) => {
+          console.log('Survey Data Sent:', response);
+          alert('Thank you for submitting the survey!');
+          this.router.navigate(['/tk']);
+        },
+        (error) => {
+          console.error('Error sending the request:', error);
+        }
+      );
+    }
+  }
+}

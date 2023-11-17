@@ -16,6 +16,7 @@
         <th>Interest Source</th>
         <th>Recommend Likelihood</th>
         <th>Additional Comments</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +34,23 @@
         <td>{{ survey.interestSource }}</td>
         <td>{{ survey.recommendLikelihood }}</td>
         <td>{{ survey.additionalComments }}</td>
+        <td>
+        <button (click)="openUpdateForm(survey)">Update</button>
+        <button (click)="deleteSurvey(survey.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
   
+  <div *ngIf="showUpdateForm">
+    <h2>Update Survey</h2>
+    <form (submit)="submitUpdateForm()">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" [(ngModel)]="updatedSurvey.firstName" name="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" [(ngModel)]="updatedSurvey.lastName" name="lastName"required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

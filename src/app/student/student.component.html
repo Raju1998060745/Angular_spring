@@ -68,8 +68,8 @@
                   <div class="row">
                       <div class="col-6">
                           <mat-form-field class="example-full-width">
-                              <!-- telephone number -->
-                              <mat-label>Telephone Number</mat-label>
+                              <!-- phone number -->
+                              <mat-label>Phone Number</mat-label>
                               <input matInput formControlName="phoneNumber" required>
                               <mat-error *ngIf="surveyform.controls['phoneNumber'].hasError('required')">This is a
                                   required field</mat-error>
@@ -109,7 +109,7 @@
                   </div>
                   <div class="row" style="margin-top:15px">
                       <!-- what did you like -->
-                      <mat-label>What did you like most about campus?</mat-label>
+                      <mat-label>What did you like most about?</mat-label>
                   </div>
                   <div class="row">
                       <div class="col-4">
@@ -143,7 +143,7 @@
                   </div>
                   <div class="row" style="margin-top:15px">
                       <!-- interest in university -->
-                      <mat-label>How did you become interested in this university?</mat-label>
+                      <mat-label>How did you become interested?</mat-label>
                   </div>
                   <div class="row">
                       <mat-radio-group formControlName="interestSource" required>
@@ -159,7 +159,7 @@
                   <div class="row" style="margin-top: 25px;">
                       <mat-form-field>
                           <!--  recommendLikelihoods -->
-                          <mat-label>How likely will you recommend school to other prospective students</mat-label>
+                          <mat-label>How likely will you recommend school to others</mat-label>
                           <mat-select formControlName="recommendLikelihood" required>
                               <mat-option *ngFor="let item of recommendLikelihood" [value]="item">
                                   {{item}}

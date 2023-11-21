@@ -40,6 +40,7 @@ export class MainComponent {
         } else if (response.message === 'failed') {
           // Authentication failed, handle the error and show an error message
           this.message = 'Authentication failed. Please check your credentials.';
+          
         }
       },
       (error) => {

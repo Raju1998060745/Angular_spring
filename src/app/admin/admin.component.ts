@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  providers: [DatePipe]
 })
 export class AdminComponent implements OnInit {
     surveys: any[]=[]; // Define a property to store the survey data
     showUpdateForm = false;
     updatedSurvey: any = {};
   
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private datePipe: DatePipe) {}
   
     ngOnInit() {
       // Make an HTTP request to fetch survey data from your Spring backend
@@ -28,18 +30,20 @@ export class AdminComponent implements OnInit {
   }
 
   submitUpdateForm() {
-      // Make an HTTP request to update the survey on the backend
-      this.http.put(`http://localhost:8080/api/surveys/${this.updatedSurvey.id}`, this.updatedSurvey)
-    .subscribe(
-        (data: any) => {
-            console.log('Survey updated successfully', data);
-            this.showUpdateForm = false;
-        },
-        (error) => {
-            console.error('Error updating survey', error);
-        }
-    );
-  }
+    // Make an HTTP request to update the survey on the backend
+    this.http.put(`http://localhost:8080/api/surveys/${this.updatedSurvey.id}`, this.updatedSurvey)
+        .subscribe(
+            (data: any) => {
+                console.log('Survey updated successfully', data);
+                this.showUpdateForm = false;
+                // Reload the page after successful update
+                window.location.reload();
+            },
+            (error) => {
+                console.error('Error updating survey', error);
+            }
+        );
+}
 
 
 // Method to delete a survey
@@ -51,4 +55,10 @@ deleteSurvey(surveyId: number) {
       console.log('Survey deleted successfully');
   });
 }
+
+formatSurveyDate(date: string): string {
+  // Use DatePipe to format the date
+  return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+}
+
 }
